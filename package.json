@@ -1,5 +1,5 @@
 {
-  "name": "pwndoc-mcp",
+  "name": "sigma-pwndoc-mcp",
   "version": "0.1.0",
   "description": "Local MCP server for PwnDoc — session, audits, findings, comments, subscriptions",
   "type": "module",

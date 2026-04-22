@@ -45,19 +45,11 @@ All configuration is done through environment variables passed to the MCP server
 
 ### Option 1: npx from npm (recommended — no install needed)
 
-Once published to npm, anyone can run the server without cloning anything:
-
-```bash
-npx pwndoc-mcp
-```
-
-The `npx` command downloads, builds (via the `prepare` hook), and runs the server in one step. Pass environment variables inline:
-
 ```bash
 PWNDOC_URL=https://pwndoc.company.tld \
 PWNDOC_API_KEY=pwndoc_0123... \
 PWNDOC_INSECURE_TLS=1 \
-npx pwndoc-mcp
+npx sigma-pwndoc-mcp
 ```
 
 Or add it directly to your MCP client config (see below) — the client handles the env vars.
@@ -154,7 +146,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
   "mcpServers": {
     "pwndoc": {
       "command": "npx",
-      "args": ["pwndoc-mcp"],
+      "args": ["sigma-pwndoc-mcp"],
       "env": {
         "PWNDOC_URL": "https://pwndoc.company.tld",
         "PWNDOC_API_KEY": "pwndoc_0123456789abcdef...",
@@ -367,38 +359,6 @@ Resources let Claude fetch full bodies on demand without paying for them in ever
 - Tool responses return slim projections by default. Pass `fields=[...]` to any read tool to restrict to only the fields you need.
 - Snapshots used by `audit_diff_since` / `check_subscriptions` store only `{id, title, status, updatedAt}` per finding — never full bodies.
 - Full audit and finding bodies are fetched lazily via MCP resources.
-
----
-
-## Publishing to npm
-
-To make the server callable via `npx pwndoc-mcp` without any local installation:
-
-1. **Create an npm account** at [npmjs.com](https://www.npmjs.com/) if you don't have one.
-
-2. **Login:**
-   ```bash
-   npm login
-   ```
-
-3. **Publish:**
-   ```bash
-   npm publish --access public
-   ```
-   The `prepare` script runs `npm run build` automatically before publishing, so `dist/` is always current.
-
-4. **Anyone can now run it with:**
-   ```bash
-   npx pwndoc-mcp
-   ```
-   Or reference it directly in any MCP client config using `"command": "npx", "args": ["pwndoc-mcp"]`.
-
-To publish under a scoped name (e.g. your org):
-```bash
-# In package.json, change "name" to "@yourscope/pwndoc-mcp"
-npm publish --access public
-# Users run: npx @yourscope/pwndoc-mcp
-```
 
 ---
 
