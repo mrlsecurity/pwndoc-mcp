@@ -1,0 +1,32 @@
+services:
+  build-and-test:
+    image: pwndoc-mcp:test
+    build:
+      context: .
+      target: test
+      args:
+        NODE_IMAGE: node:20.18.1-alpine
+
+  audit:
+    image: pwndoc-mcp:audit
+    build:
+      context: .
+      target: audit
+
+  runtime:
+    image: pwndoc-mcp:latest
+    build:
+      context: .
+      target: runtime
+    environment:
+      PWNDOC_URL: ${PWNDOC_URL:?must be set}
+      PWNDOC_INSECURE_TLS: ${PWNDOC_INSECURE_TLS:-0}
+      PWNDOC_MCP_STATE_DIR: /state
+    volumes:
+      - pwndoc-mcp-state:/state
+    stdin_open: true
+    tty: false
+    network_mode: host
+
+volumes:
+  pwndoc-mcp-state:

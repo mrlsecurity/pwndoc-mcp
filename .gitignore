@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Test & coverage
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Claude / AI assistant files
+CLAUDE.md
+.claude/
+.cursor/
+.cursorrules
+.aider*
+.copilot/
+
+# MCP runtime state (written to ~/.pwndoc-mcp/ by default — keep out of source)
+.pwndoc-mcp/
+
+# TypeScript incremental build info
+tsconfig.tsbuildinfo
